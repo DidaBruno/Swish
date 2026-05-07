@@ -1,0 +1,62 @@
+<svg
+  width="70"
+  height="70"
+  viewBox="0 0 70 70"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+
+  <!-- Orange rounded background -->
+  <rect
+    width="70"
+    height="70"
+    rx="16"
+    fill="#E8621A"
+  />
+
+  <!-- Basketball outline -->
+  <circle
+    cx="35"
+    cy="35"
+    r="18"
+    stroke="white"
+    stroke-width="3"
+  />
+
+  <!-- Center line -->
+  <path
+    d="M35 17C35 17 35 27 35 35C35 43 35 53 35 53"
+    stroke="white"
+    stroke-width="3"
+    stroke-linecap="round"
+    fill="none"
+  />
+
+  <!-- Horizontal curve -->
+  <path
+    d="M17 35C23 31 47 31 53 35"
+    stroke="white"
+    stroke-width="3"
+    stroke-linecap="round"
+    fill="none"
+  />
+
+  <!-- Left curve -->
+  <path
+    d="M25 20C30 25 30 45 25 50"
+    stroke="white"
+    stroke-width="3"
+    stroke-linecap="round"
+    fill="none"
+  />
+
+  <!-- Right curve -->
+  <path
+    d="M45 20C40 25 40 45 45 50"
+    stroke="white"
+    stroke-width="3"
+    stroke-linecap="round"
+    fill="none"
+  />
+
+</svg>
