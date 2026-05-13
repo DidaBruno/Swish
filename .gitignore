@@ -1,3 +1,4 @@
 node_modules/
 .env
 firebase-service-account.json
+client/js/firebase-config.js

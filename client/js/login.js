@@ -2,16 +2,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged  } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 import { getFirestore, doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-
-// firebase config
-const firebaseConfig = {
-    apiKey: "AIzaSyASknHYNJEN1YZMYUwvUFYVMTIFtOdCF8I",
-    authDomain: "swish-1c141.firebaseapp.com",
-    projectId: "swish-1c141",
-    storageBucket: "swish-1c141.firebasestorage.app",
-    messagingSenderId: "814460384852",
-    appId: "1:814460384852:web:fb053db2dd82545c8edfc1"
-};
+import { firebaseConfig } from "./firebase-config.js";
 
 // firebase initialization
 const app = initializeApp(firebaseConfig);
