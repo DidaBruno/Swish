@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swish - Login</title>
+    <link rel="stylesheet" href="../css/login.css">
+</head>
+<body>
+    <div class="page-wrapper">
+
+        <div class="brand-wrap">
+            <div class="brand-icon">
+                <img src="../assets/svg/logo.svg" alt="Swish" width="64" height="64">
+            </div>
+            <h1 class="brand-name">SW<span>I</span>SH</h1>
+            <p class="brand-sub">Basketball Workout Logger</p>
+        </div>
+
+        <div class="auth-card">
+
+            <!-- succes and error messages -->
+            <div id="successMsg" class="success-msg d-none">
+                Account created! You can now log in.
+            </div>
+            <div id="errorMsg" class="error-banner d-none"></div>
+
+            <!-- login / register tabs -->
+            <div class="tab-switcher">
+                <button id="tabLogin" class="tab-btn active" onclick="switchTab('login')">Log in</button>
+                <button id="tabRegister" class="tab-btn" onclick="switchTab('register')">Register</button>
+            </div>
+
+            <!-- login form -->
+            <form id="loginForm" novalidate>
+
+                <div class="field-group">
+                    <label for="loginEmail">Email</label>
+                    <input id="loginEmail" type="email" placeholder="your@email.com">
+                    <span id="loginEmailError" class="field-error">Please enter a valid email address.</span>
+                </div>
+
+                <div class="field-group">
+                    <label for="loginPassword">Password</label>
+                    <div class="pass-wrap">
+                        <input id="loginPassword" type="password" placeholder="Your password">
+                        <button type="button" class="eye-btn" onclick="togglePassword('loginPassword', this)">
+                            <img id="loginPasswordEye" src="../assets/svg/eye.svg" alt="show passowrd" width="18" height="18">
+                        </button>
+                    </div>
+                    <span id="loginPasswordError" class="field-error">Password is required.</span>
+                </div>
+
+                <div class="forgot-wrap">
+                    <a href="#" class="forgot-link">Forgot password?</a>
+                </div>
+
+                <button id="loginBtn" type="button" class="btn-submit" onclick="handleLogin()">Log in</button>
+            </form>
+
+            <!-- register form -->
+            <form id="registerForm" class="d-none" novalidate>
+                
+                <div class="field-group">
+                    <label for="registerUsername">Username</label>
+                    <input id="registerUsername" type="text" placeholder="e.g. hooper23">
+                    <span id="registerUsernameError" class="field-error">Username must be at least 3 characters with no spaces.</span>
+                </div>
+                
+                <div class="field-group">
+                    <label for="registerEmail">Email</label>
+                    <input id="registerEmail" type="email" placeholder="your@email.com">
+                    <span id="registerEmailError" class="field-error">Please enter a valid email address.</span>
+                </div>
+
+                <div class="field-group">
+                    <label for="registerPassword">Password</label>
+                    <div class="pass-wrap">
+                        <input id="registerPassword" type="password" placeholder="Minimum 6 characters" oninput="checkStrength()">
+                        <button type="button" class="eye-btn" onclick="togglePassword('registerPassword', this)">
+                            <img id="registerPasswordEye" src="../assets/svg/eye.svg" alt="show password" width="18" height="18">
+                        </button>
+                    </div>
+                    <div class="strength-bar">
+                        <div class="strength-seg" id="s1"></div>
+                        <div class="strength-seg" id="s2"></div>
+                        <div class="strength-seg" id="s3"></div>
+                        <div class="strength-seg" id="s4"></div>
+                    </div>
+                    <span id="strengthLabel" class="strength-label"></span>
+                    <span id="registerPasswordError" class="field-error">Password must be at least 6 characters.</span>
+                </div>
+
+                <div class="field-group">
+                    <label for="registerConfirm">Confirm password</label>
+                    <div class="pass-wrap">
+                        <input id="registerConfirm" type="password" placeholder="Repeat your password">
+                        <button type="button" class="eye-btn" onclick="togglePassword('registerConfirm', this)">
+                            <img id="registerConfirmEye" src="../assets/svg/eye.svg" alt="show password" width="18" height="18">
+                        </button>
+                    </div>
+                    <span id="registerConfirmError" class="field-error">Passwords do not match.</span>
+                </div>
+
+                <button id="registerBtn" type="button" class="btn-submit" onclick="handleRegister()">Create account</button>
+            </form>
+        </div>
+    </div>
+
+    <script type="module" src="../js/login.js"></script>
+</body>
+</html>
