@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swish - Dashboard</title>
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body>
+    <!-- navbar - temporaray hardcoded -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <div class="nav-brand-icon">
+                <img src="../assets/svg/logo.svg" alt="Swish" width="28" height="28">
+            </div>
+            <span class="nav-brand-name">SW<span>I</span>SH</span>
+        </div>
+
+        <div class="nav-links">
+            <a href="/dashboard" class="nav-link active">Dashboard</a>
+            <a href="/log-workout" class="nav-link">Log workout</a>
+            <a href="/workouts" class="nav-link">Workouts</a>
+            <a href="/profile" class="nav-link">Profile</a>
+            <a href="/references" class="nav-link">References</a>
+        </div>
+
+        <div class="nav-right">
+            <span id="navUsername" class="nav-username"></span>
+            <button class="nav-logout-btn" onclick="handleLogout()">Log out</button>
+        </div>
+    </nav>
+
+    <main class="page-wrapper">
+        <!-- greeting header -->
+        <div class="dashboard-header">
+            <div class="dashboard-greeting">
+                <h1 id="greetingText">Good morning</h1>
+                <p id="greetingDate" class="greeting-date"></p>
+            </div>
+            <div id="weeklyBadge" class="weekly-badge">
+                <span id="weeklyCount">0</span> workouts this week
+            </div>
+        </div>
+
+        <!-- call to action (only if no workout todayok) -->
+        <div id="ctaBanner" class="cta-banner d-none">
+            <div class="cta-left">
+                <div class="cta-icon">
+                    <img src="../assets/svg/logo.svg" alt="" width="20" height="20">
+                </div>
+                <div class="cta-text">
+                    <p class="cta-title">No workout logged today</p>
+                    <p class="cta-sub">Keep it going — log today's session</p>
+                </div>
+            </div>
+            <a href="/log-workout" class="btn-log">Log workout</a>
+        </div>
+
+        <!-- label for today or last workout -->
+        <p id="sectionLabel" class="section-label"></p>
+
+        <!-- workout card (today or last workout) -->
+        <div id="workoutCard" class="workout-card d-none">
+
+            <!-- card header -->
+            <div class="card-header">
+                <div class="card-header-left">
+                    <h2 class="card-title">Shooting</h2>
+                    <p id="cardDate" class="card-date"></p>
+                </div>
+                <a id="cardAction" href="#" class="card-action-btn"></a>
+            </div>
+
+            <!-- shooting stats -->
+            <div id="shootingSection" class="shooting-grid d-none">
+                <div class="stat-box">
+                    <span id="statTwos" class="stat-val">0</span>
+                    <span class="stat-lbl">2-pointers</span>
+                </div>
+                <div class="stat-box">
+                    <span id="statThrees" class="stat-val">0</span>
+                    <span class="stat-lbl">3-pointers</span>
+                </div>
+                <div class="stat-box">
+                    <span id="statFT" class="stat-val">0</span>
+                    <span class="stat-lbl">Free throws</span>
+                </div>
+                <div class="stat-box">
+                    <span id="statLayups" class="stat-val">0</span>
+                    <span class="stat-lbl">Layups</span>
+                </div>
+                <div class="stat-box">
+                    <span id="statDunks" class="stat-val">0</span>
+                    <span class="stat-lbl">Dunks</span>
+                </div>
+            </div>
+
+            <!-- card divider -->
+            <hr id="cardDivider" class="card-divider d-none">
+
+            <!-- handling drills  -->
+            <div id="handlingSection" class="d-none">
+                <p class="handling-title">Handling drills</p>
+                <ul id="drillList" class="drill-list"></ul>
+                <a id="viewAllLink" href="#" class="view-all-link d-none">View all drills</a>
+            </div>
+
+            <!-- games section (only if no shooting data) -->
+            <div id="gamesSection" class="d-none">
+                <p class="handling-title">Games</p>
+                <ul id="gamesList" class="games-list"></ul>
+            </div>
+
+        </div>
+
+        <!-- empty state (no workouts logged) -->
+        <div id="emptyState" class="empty-state d-none">
+            <p class="empty-title">No workouts logged yet</p>
+            <p class="empty-sub">Start by logging your first session</p>
+            <a href="/log-workout" class="btn-log">Log workout</a>
+        </div>
+
+    </main>
+
+     <script type="module" src="../js/dashboard.js"></script>
+</body>
+</html>

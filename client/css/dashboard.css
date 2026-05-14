@@ -1,0 +1,315 @@
+.page-wrapper {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+}
+
+/* dashboard header */
+.dashboard-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 1.75rem;
+}
+
+.dashboard-greeting h1 {
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.greeting-date {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 3px;
+}
+
+.weekly-badge {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.weekly-badge span {
+    color: var(--orange);
+    font-weight: 600;
+}
+
+/* call to action */
+.cta-banner {
+    background: rgba(232, 98, 26, 0.1);
+    border: 1px solid rgba(232, 98, 26, 0.35);
+    border-radius: 14px;
+    padding: 1rem 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.25rem;
+}
+
+.cta-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.cta-icon {
+    width: 38px;
+    height: 38px;
+    background: rgba(232, 98, 26, 0.15);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.cta-text .cta-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.cta-text .cta-sub {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 2px;
+}
+
+.btn-log {
+    background: var(--orange);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.btn-log:hover {
+    background: var(--orange-hover);
+}
+
+/* label for workout */
+.section-label {
+    font-size: 11px;
+    color: var(--dim);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+/* workout card */
+.workout-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.25rem;
+}
+
+.card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 1.25rem;
+}
+
+.card-title {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.card-date {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 3px;
+}
+
+.card-action-btn {
+    font-size: 12px;
+    color: var(--blue);
+    text-decoration: none;
+    background: rgba(74, 154, 255, 0.1);
+    border-radius: 6px;
+    padding: 4px 10px;
+    white-space: nowrap;
+}
+
+.card-action-btn:hover {
+    background: rgba(74, 154, 255, 0.2);
+}
+
+/* shooting grid */
+.shooting-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+    margin-bottom: 1.25rem;
+}
+
+.stat-box {
+    background: var(--surface2);
+    border-radius: 10px;
+    padding: 10px 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.stat-val {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--orange);
+}
+
+.stat-lbl {
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: 4px;
+    letter-spacing: 0.3px;
+}
+
+.card-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 1.1rem 0;
+}
+
+/* handling drills */
+.handling-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 8px;
+}
+
+.drill-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.drill-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 7px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+}
+
+.drill-list li:last-child {
+    border-bottom: none;
+}
+
+.drill-name {
+    color: var(--text);
+}
+
+.drill-count {
+    color: var(--muted);
+}
+
+.drill-count span {
+    color: var(--text);
+    font-weight: 600;
+}
+
+.view-all-link {
+    display: block;
+    font-size: 12px;
+    color: var(--blue);
+    text-decoration: none;
+    margin-top: 10px;
+    text-align: right;
+}
+
+.view-all-link:hover {
+    text-decoration: underline;
+}
+
+/* games played section */
+.games-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.games-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 7px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+}
+
+.games-list li:last-child {
+    border-bottom: none;
+}
+
+.game-teams {
+    color: var(--text);
+}
+
+.game-score {
+    color: var(--muted);
+}
+
+.game-score span {
+    color: var(--text);
+    font-weight: 600;
+}
+
+/* empty state if there is no workouts at all */
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 1rem;
+    text-align: center;
+}
+
+.empty-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 6px;
+}
+
+.empty-sub {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 1.5rem;
+}
+
+/* responsive */
+@media (max-width: 600px) {
+    .dashboard-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .shooting-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .cta-banner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .btn-log {
+        width: 100%;
+        text-align: center;
+    }
+}
