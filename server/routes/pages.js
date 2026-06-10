@@ -17,4 +17,24 @@ router.get('/dashboard', (req, res) => {
     res.sendFile(path.join(__dirname, '../../client/pages/dashboard.html'));
 });
 
+router.get('/log-workout', (req, res) => {
+    res.sendFile(path.join(__dirname, '../../client/pages/log-workout.html'));
+});
+
+router.get('/workouts', (req, res) => {
+    res.sendFile(path.join(__dirname, '../../client/pages/workouts.html'));
+});
+
+router.get('/workout-detail', (req, res) => {
+    res.sendFile(path.join(__dirname, '../../client/pages/workout-detail.html'));
+});
+
+router.get('/profile', (req, res) => {
+    res.sendFile(path.join(__dirname, '../../client/pages/profile.html'));
+});
+
+router.get('/references', (req, res) => {
+    res.sendFile(path.join(__dirname, '../../client/pages/references.html'));
+});
+
 export default router;

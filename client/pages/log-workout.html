@@ -1,0 +1,85 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swish - Log workout</title>
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/log-workout.css">
+</head>
+<body>
+
+    <!-- navbar - loads from navbar.js -->
+    <nav class="navbar" id="navbar"></nav>
+
+    <main class="page-wrapper">
+
+        <!-- page header -->
+        <div class="log-header">
+            <h1>Log workout</h1>
+            <div class="date-picker">
+                <label for="workoutDate">Date</label>
+                <input type="date" id="workoutDate">
+            </div>
+        </div>
+
+        <!-- error banner -->
+        <div id="errorBanner" class="error-banner d-none"></div>
+
+        <!-- tabs -->
+        <div class="tab-switcher">
+            <button class="tab-btn active" data-tab="shooting" onclick="switchTab('shooting')">Shooting</button>
+            <button class="tab-btn" data-tab="handling" onclick="switchTab('handling')">Handling</button>
+            <button class="tab-btn" data-tab="games" onclick="switchTab('games')">Games</button>
+        </div>
+
+        <!-- shooting tab -->
+        <section id="shootingTab" class="tab-content">
+            <div class="shooting-inputs">
+                <div class="input-box">
+                    <label for="inputTwos">2-pointers</label>
+                    <input type="number" id="inputTwos" min="0" value="0">
+                </div>
+                <div class="input-box">
+                    <label for="inputThrees">3-pointers</label>
+                    <input type="number" id="inputThrees" min="0" value="0">
+                </div>
+                <div class="input-box">
+                    <label for="inputFT">Free throws</label>
+                    <input type="number" id="inputFT" min="0" value="0">
+                </div>
+                <div class="input-box">
+                    <label for="inputLayups">Layups</label>
+                    <input type="number" id="inputLayups" min="0" value="0">
+                </div>
+                <div class="input-box">
+                    <label for="inputDunks">Dunks</label>
+                    <input type="number" id="inputDunks" min="0" value="0">
+                </div>
+            </div>
+        </section>
+
+        <!-- handling tab -->
+        <section id="handlingTab" class="tab-content d-none">
+            <ul id="drillList" class="drill-input-list"></ul>
+            <button type="button" class="btn-add" onclick="addDrill()">+ Add drill</button>
+        </section>
+
+        <!-- games tab -->
+        <section id="gamesTab" class="tab-content d-none">
+            <div id="gamesList" class="games-input-list"></div>
+            <button type="button" class="btn-add" onclick="addGame()">+ Add game</button>
+        </section>
+
+        <!-- save button -->
+        <div class="save-bar">
+            <button type="button" id="saveBtn" class="btn-save" onclick="saveWorkout()">Save workout</button>
+        </div>
+
+    </main>
+
+    <script type="module" src="../js/navbar.js"></script>
+    <script type="module" src="../js/log-workout.js"></script>
+</body>
+</html>

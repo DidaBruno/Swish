@@ -10,7 +10,7 @@ onAuthStateChanged(auth, (user) => {
     initDashboard(user);
 });
 
-// initialize dashobard 
+// initialize dashboard 
 async function initDashboard(user) {
     
     setGreeting(user.displayName);

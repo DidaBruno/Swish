@@ -12,6 +12,7 @@ export async function getTodayWorkout(req, res) {
             .collection('workouts')
             .where('userId', '==', userId)
             .where('date', '==', today)
+            .orderBy('createdAt', 'desc')
             .limit(1)
             .get();
         
@@ -70,5 +71,40 @@ export async function getRecentWorkout(req, res) {
     } catch (err) {
         console.error('getRecentWorkout error:', err);
         res.status(500).json({ error: 'Failed to fetch recent workout' });
+    }
+}
+
+// save a new workout to database
+export async function saveWorkout(req, res) {
+    try {
+        const userId = req.user.uid;
+
+        // reject future dates
+        const today = new Date().toISOString().split('T')[0];
+        if (req.body.date > today) {
+            return res.status(400).json({ error: 'Cannot log a workout for a future date' });
+        }
+
+        // build the workout object from the request body
+        const workout = {
+            userId,
+            date: req.body.date,
+            drills: {
+                shooting: req.body.drills?.shooting || {},
+                handling: req.body.drills?.handling || []
+            },
+            games: req.body.games || [],
+            createdAt: new Date().toISOString()
+        };
+
+        // add a new document to the workouts collection
+        const docRef = await db.collection('workouts').add(workout);
+
+        // return the new document id
+        return res.status(201).json({ id: docRef.id });
+
+    } catch (err) {
+        console.error('saveWorkout error:', err);
+        res.status(500).json({ error: 'Failed to save workout' });
     }
 }
