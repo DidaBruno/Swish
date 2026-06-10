@@ -1,5 +1,5 @@
 import { auth } from './firebase-config.js';
-import { onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
+import { onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
 
 // redirect to login if user is not logged in
 onAuthStateChanged(auth, (user) => {
@@ -7,17 +7,11 @@ onAuthStateChanged(auth, (user) => {
         window.location.href = '/login';
         return
     }
-    initDashobard(user);
+    initDashboard(user);
 });
 
-// logout
-window.handleLogout = async function () {
-    await signOut(auth);
-    window.location.href = '/login';
-}
-
 // initialize dashobard 
-async function initDashobard(user) {
+async function initDashboard(user) {
     
     setGreeting(user.displayName);
 
@@ -53,8 +47,6 @@ async function initDashobard(user) {
 
 // greeting
 function setGreeting(displayName) {
-    document.getElementById('navUsername').textContent = displayName || '';
-
     //greeting based on time of day
     const hour = new Date().getHours();
     let greeting = 'Good morning';
@@ -131,7 +123,7 @@ function renderWorkoutCard(workout, isToday) {
 }
 
 // render drills
-function rednerDrills(drills, workoutId) {
+function renderDrills(drills, workoutId) {
     const list = document.getElementById('drillList');
     const viewAllLink = document.getElementById('viewAllLink');
 
