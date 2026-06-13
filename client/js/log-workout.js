@@ -112,7 +112,6 @@ function collectHandling() {
             drills.push({ name, count, unit });
         }
     });
-
     return drills;
 }
 
@@ -132,9 +131,11 @@ function collectGames() {
             score: Number(block.querySelector('.team-b-score').value) || 0
         };
 
-        games.push({ playersPerTeam, teamA, teamB });
+        // only include games where both teams have players named
+        if (teamA.players && teamB.players) {
+            games.push({ playersPerTeam, teamA, teamB });
+        }
     });
-
     return games;
 }
 

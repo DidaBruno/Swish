@@ -1,5 +1,6 @@
 import { db } from '../firebase.js';
 
+// this is for dashobard
 // get todays workout
 export async function getTodayWorkout(req, res) {
     try {
@@ -75,6 +76,7 @@ export async function getRecentWorkout(req, res) {
     }
 }
 
+// this is for log workout
 // save a new workout to database
 export async function saveWorkout(req, res) {
     try {
@@ -110,6 +112,7 @@ export async function saveWorkout(req, res) {
     }
 }
 
+// this is for workouts history
 // get all workouts
 export async function getAllWorkouts(req, res) {
     try {
@@ -133,5 +136,100 @@ export async function getAllWorkouts(req, res) {
     } catch (err) {
         console.error('getAllWorkouts error:', err);
         res.status(500).json({ error: 'Failed to fetch workouts' });
+    }
+}
+
+// this is for workout detail
+// get one workout by id
+export async function getWorkoutById(req, res) {
+    try {
+        const userId = req.user.uid;
+        const workoutId = req.params.id;
+
+        const doc = await db.collection('workouts').doc(workoutId).get();
+
+        // check the workout exists
+        if (!doc.exists) {
+            return res.status(404).json({ error: 'Workout not found' });
+        }
+
+        const workout = doc.data();
+
+        // make sure this workout belongs to the requesting user
+        if (workout.userId !== userId) {
+            return res.status(403).json({ error: 'Not authorized' });
+        }
+
+        return res.json({ workout: { id: doc.id, ...workout } });
+
+    } catch (err) {
+        console.error('getWorkoutById error:', err);
+        res.status(500).json({ error: 'Failed to fetch workout' });
+    }
+}
+
+// update a workout
+export async function updateWorkout(req, res) {
+    try {
+        const userId = req.user.uid;
+        const workoutId = req.params.id;
+
+        const docRef = db.collection('workouts').doc(workoutId);
+        const doc = await docRef.get();
+
+        if (!doc.exists) {
+            return res.status(404).json({ error: 'Workout not found' });
+        }
+
+        // make sure this workout belongs to the requesting user
+        if (doc.data().userId !== userId) {
+            return res.status(403).json({ error: 'Not authorized' });
+        }
+
+        // build the updated fields
+        const updated = {
+            drills: {
+                shooting: req.body.drills?.shooting || {},
+                handling: req.body.drills?.handling || []
+            },
+            games: req.body.games || [],
+            updatedAt: new Date().toISOString()
+        };
+
+        await docRef.update(updated);
+
+        return res.json({ success: true });
+
+    } catch (err) {
+        console.error('updateWorkout error:', err);
+        res.status(500).json({ error: 'Failed to update workout' });
+    }
+}
+
+// delete a workout
+export async function deleteWorkout(req, res) {
+    try {
+        const userId = req.user.uid;
+        const workoutId = req.params.id;
+
+        const docRef = db.collection('workouts').doc(workoutId);
+        const doc = await docRef.get();
+
+        if (!doc.exists) {
+            return res.status(404).json({ error: 'Workout not found' });
+        }
+
+        // make sure this workout belongs to the requesting user
+        if (doc.data().userId !== userId) {
+            return res.status(403).json({ error: 'Not authorized' });
+        }
+
+        await docRef.delete();
+
+        return res.json({ success: true });
+
+    } catch (err) {
+        console.error('deleteWorkout error:', err);
+        res.status(500).json({ error: 'Failed to delete workout' });
     }
 }

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swish - Workout</title>
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/workout-detail.css">
+</head>
+<body>
+
+    <!-- navbar - loads from navbar.js -->
+    <nav class="navbar" id="navbar"></nav>
+
+    <main class="page-wrapper">
+
+        <!-- back link -->
+        <a href="/workouts" class="back-link">← Back to workouts</a>
+
+        <!-- loading state -->
+        <div id="loadingState" class="info-state">Loading workout...</div>
+
+        <!-- error state -->
+        <div id="errorState" class="info-state d-none">
+            <p class="info-title">Workout not found</p>
+            <a href="/workouts" class="btn-primary">Back to workouts</a>
+        </div>
+
+        <!-- workout content -->
+        <div id="workoutContent" class="d-none">
+
+            <!-- header -->
+            <div class="detail-header">
+                <h1 id="workoutDate"></h1>
+                <div class="detail-actions">
+                    <button id="editBtn" class="btn-secondary" onclick="enterEditMode()">Edit</button>
+                    <button id="deleteBtn" class="btn-danger" onclick="openDeletePopup()">Delete</button>
+                    <button id="saveBtn" class="btn-primary d-none" onclick="saveChanges()">Save</button>
+                    <button id="cancelBtn" class="btn-secondary d-none" onclick="cancelEdit()">Cancel</button>
+                </div>
+            </div>
+
+            <!-- error banner for edit mode -->
+            <div id="errorBanner" class="error-banner d-none"></div>
+
+            <!-- shooting section -->
+            <section id="shootingSection" class="detail-section d-none">
+                <h2 class="detail-section-title">Shooting</h2>
+                <div id="shootingView" class="shooting-grid"></div>
+                <div id="shootingEdit" class="shooting-inputs d-none"></div>
+            </section>
+
+            <!-- handling section -->
+            <section id="handlingSection" class="detail-section d-none">
+                <h2 class="detail-section-title">Handling drills</h2>
+                <ul id="handlingView" class="detail-drill-list"></ul>
+                <div id="handlingEdit" class="d-none">
+                    <ul id="drillEditList" class="drill-input-list"></ul>
+                    <button type="button" class="btn-add" onclick="addDrill()">+ Add drill</button>
+                </div>
+            </section>
+
+            <!-- games section -->
+            <section id="gamesSection" class="detail-section d-none">
+                <h2 class="detail-section-title">Games</h2>
+                <ul id="gamesView" class="detail-games-list"></ul>
+                <div id="gamesEdit" class="d-none">
+                    <div id="gameEditList" class="games-input-list"></div>
+                    <button type="button" class="btn-add" onclick="addGame()">+ Add game</button>
+                </div>
+            </section>
+
+        </div>
+
+    </main>
+
+    <!-- delete confirmation popup -->
+    <div id="deletePopup" class="popup-overlay d-none">
+        <div class="popup">
+            <h3 class="popup-title">Delete workout?</h3>
+            <p class="popup-text">Are you sure you want to delete this workout? This can't be undone.</p>
+            <div class="popup-actions">
+                <button class="btn-secondary" onclick="closeDeletePopup()">Cancel</button>
+                <button class="btn-danger" onclick="confirmDelete()">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="../js/navbar.js"></script>
+    <script type="module" src="../js/workout-detail.js"></script>
+</body>
+</html>
