@@ -44,7 +44,7 @@
     letter-spacing: 1.5px;
 }
 
-/* auth card */
+/* Auth card */
 .auth-card {
     background: var(--surface);
     border: 1px solid var(--border);
@@ -54,7 +54,7 @@
     max-width: 400px;
 }
 
-/* tabs */
+/* Tabs */
 .tab-switcher {
     display: flex;
     background: var(--surface2);
@@ -81,7 +81,7 @@
     color: #fff;
 }
 
-/* fields */
+/* Fields */
 .field-group {
     margin-bottom: 1.1rem;
 }
@@ -118,7 +118,7 @@
     color: var(--dim);
 }
 
-/* password wrap */
+/* Password wrap */
 .pass-wrap {
     position: relative;
 }
@@ -145,7 +145,7 @@
     color: var(--muted);
 }
 
-/* errors */
+/* Errors */
 .field-error {
     display: none;
     font-size: 11px;
@@ -167,7 +167,7 @@
     margin-bottom: 1rem;
 }
 
-/* success */
+/* Success */
 .success-msg {
     background: rgba(29,158,117,0.12);
     border: 1px solid rgba(29,158,117,0.3);
@@ -178,7 +178,7 @@
     margin-bottom: 1rem;
 }
 
-/* strength bar */
+/* Strength bar */
 .strength-bar {
     display: flex;
     gap: 4px;
@@ -200,7 +200,7 @@
     display: block;
 }
 
-/* forgot */
+/* Forgot */
 .forgot-wrap {
     text-align: right;
     margin-bottom: 1rem;
@@ -217,7 +217,7 @@
     text-decoration: underline;
 }
 
-/* submit button */
+/* Submit button */
 .btn-submit {
     width: 100%;
     padding: 11px;
@@ -245,7 +245,7 @@
     cursor: not-allowed;
 }
 
-/* responsive */
+/* Responsive */
 @media (max-width: 480px) {
     .auth-card {
         padding: 1.5rem;

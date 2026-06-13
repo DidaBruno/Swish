@@ -29,6 +29,7 @@ export async function getTodayWorkout(req, res) {
     }
 }
 
+// get recent workout
 export async function getRecentWorkout(req, res) {
     try {
         const userId = req.user.uid;
@@ -106,5 +107,31 @@ export async function saveWorkout(req, res) {
     } catch (err) {
         console.error('saveWorkout error:', err);
         res.status(500).json({ error: 'Failed to save workout' });
+    }
+}
+
+// get all workouts
+export async function getAllWorkouts(req, res) {
+    try {
+        const userId = req.user.uid;
+
+        // fetch all workouts for this user, newest first
+        const snapshot = await db
+            .collection('workouts')
+            .where('userId', '==', userId)
+            .orderBy('date', 'desc')
+            .get();
+
+        // map each document into a clean object with its id
+        const workouts = snapshot.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data()
+        }));
+
+        return res.json({ workouts });
+
+    } catch (err) {
+        console.error('getAllWorkouts error:', err);
+        res.status(500).json({ error: 'Failed to fetch workouts' });
     }
 }

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swish - Workouts</title>
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/workouts.css">
+</head>
+<body>
+
+    <!-- navbar - loads from navbar.js -->
+    <nav class="navbar" id="navbar"></nav>
+
+    <main class="page-wrapper">
+
+        <!-- page header -->
+        <div class="workouts-header">
+            <h1>Workouts</h1>
+        </div>
+
+        <!-- filters -->
+        <div class="filters-bar">
+
+            <!-- type filter -->
+            <div class="filter-group">
+                <span class="filter-label">Type</span>
+                <div class="type-filters">
+                    <button class="type-btn active" data-type="all" onclick="setTypeFilter('all')">All</button>
+                    <button class="type-btn" data-type="shooting" onclick="setTypeFilter('shooting')">Shooting</button>
+                    <button class="type-btn" data-type="handling" onclick="setTypeFilter('handling')">Handling</button>
+                    <button class="type-btn" data-type="games" onclick="setTypeFilter('games')">Games</button>
+                </div>
+            </div>
+
+            <!-- date range filter -->
+            <div class="filter-group">
+                <span class="filter-label">From</span>
+                <input type="date" id="dateFrom" class="date-input" onchange="applyFilters()">
+            </div>
+            <div class="filter-group">
+                <span class="filter-label">To</span>
+                <input type="date" id="dateTo" class="date-input" onchange="applyFilters()">
+            </div>
+
+            <!-- reset -->
+            <button class="btn-reset" onclick="resetFilters()">Reset</button>
+        </div>
+
+        <!-- loading state -->
+        <div id="loadingState" class="info-state">Loading workouts...</div>
+
+        <!-- workouts grouped by month, rendered by workout.js -->
+        <div id="workoutsContainer"></div>
+
+        <!-- empty states -->
+        <div id="emptyState" class="info-state d-none">
+            <p class="info-title">No workouts logged yet</p>
+            <p class="info-sub">Start by logging your first session</p>
+            <a href="/log-workout" class="btn-log">Log workout</a>
+        </div>
+
+        <div id="noMatchState" class="info-state d-none">
+            <p class="info-title">No workouts match your filters</p>
+            <p class="info-sub">Try adjusting the type or date range</p>
+        </div>
+
+    </main>
+
+    <script type="module" src="../js/navbar.js"></script>
+    <script type="module" src="../js/workouts.js"></script>
+</body>
+</html>
