@@ -1,11 +1,13 @@
 // firebase imports
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, updateProfile } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-import { getFirestore, doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, updateProfile } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 import { auth, db } from './firebase-config.js';
+
+let isRegistering = false;
 
 // redirect for logged in users
 onAuthStateChanged(auth, (user) => {
-    if (user) {
+    if (user && !isRegistering) {
         window.location.href = "/dashboard";
     }
 });
@@ -124,7 +126,8 @@ window.handleRegister = async function() {
     if (!valid) return;
 
     setLoading('registerBtn', true, 'Create account');
-
+    
+    isRegistering = true;
     try {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
@@ -138,9 +141,10 @@ window.handleRegister = async function() {
             createdAt: serverTimestamp()
         });
 
-        switchTab('login');
-        document.getElementById('successMsg').classList.remove('d-none');
+        isRegistering = false;
     } catch (err) {
+        isRegistering = false;
+        console.error('FULL REGISTER ERROR:', err.code, err.message);
         const msg = err.code === 'auth/email-already-in-use'
         ? 'An account with this email already exists.'
         : 'Something went wrong. Please try again.';

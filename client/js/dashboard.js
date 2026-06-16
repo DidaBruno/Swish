@@ -1,5 +1,6 @@
 import { auth } from './firebase-config.js';
 import { onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
+import { getUsername } from './user.js';
 
 // redirect to login if user is not logged in
 onAuthStateChanged(auth, (user) => {
@@ -13,8 +14,9 @@ onAuthStateChanged(auth, (user) => {
 // initialize dashboard 
 async function initDashboard(user) {
     
-    setGreeting(user.displayName);
-
+    const username = await getUsername(user);
+    setGreeting(username);
+    
     // get the id token to authenticate API requests
     const token = await user.getIdToken();
 
