@@ -1,9 +1,11 @@
 import { auth } from './firebase-config.js';
 import { onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
+import { getTemplates, saveTemplate, deleteTemplate } from './templates.js';
 
 // state
 let workoutId = null;
 let currentWorkout = null;
+let currentUser = null;
 
 // get workout ID from URL
 const params = new URLSearchParams(window.location.search);
@@ -19,6 +21,7 @@ onAuthStateChanged(auth, (user) => {
         showError();
         return;
     }
+    currentUser = user;
     loadWorkout(user);
 });
 
@@ -48,6 +51,74 @@ async function loadWorkout(user) {
         showError();
     }
 }
+
+// load templates
+async function loadTemplates() {
+    try {
+        const token = await currentUser.getIdToken();
+        const templates = await getTemplates(token);
+        renderTemplates(templates);
+    } catch (err) {
+        console.error('Failed to load templates:', err);
+    }
+}
+
+// render template chips
+function renderTemplates(templates) {
+    const container = document.getElementById('templateButtons');
+    container.innerHTML = '';
+
+    if (templates.length === 0) {
+        container.innerHTML = '<p class="templates-empty">No saved drills yet. Save a drill to reuse it later.</p>';
+        return;
+    }
+
+    templates.forEach(t => {
+        const chip = document.createElement('div');
+        chip.className = 'template-chip';
+        chip.innerHTML = `
+            <span onclick="useTemplate('${t.name}', '${t.defaultUnit}')">${t.name}</span>
+            <button type="button" class="chip-delete" onclick="removeTemplate('${t.id}')">✕</button>
+        `;
+        container.appendChild(chip);
+    });
+}
+
+// use a template
+window.useTemplate = function (name, unit) {
+    addDrill({ name, count: 0, unit });
+};
+
+// save a drill row as a template
+window.saveDrillAsTemplate = async function (btn) {
+    const row = btn.closest('.drill-row');
+    const name = row.querySelector('.drill-name-input').value.trim();
+    const unit = row.querySelector('select').value;
+
+    if (!name) {
+        showBannerError('Enter a drill name before saving as a template.');
+        return;
+    }
+
+    try {
+        const token = await currentUser.getIdToken();
+        await saveTemplate(token, name, unit);
+        loadTemplates();
+    } catch (err) {
+        showBannerError(err.message);
+    }
+};
+
+// remove a template
+window.removeTemplate = async function (id) {
+    try {
+        const token = await currentUser.getIdToken();
+        await deleteTemplate(token, id);
+        loadTemplates();
+    } catch (err) {
+        console.error('Failed to delete template:', err);
+    }
+};
 
 // show error state
 function showError() {
@@ -143,6 +214,9 @@ window.enterEditMode = function () {
     const games = w.games || [];
     games.forEach(g => addGame(g));
     document.getElementById('gamesEdit').classList.remove('d-none');
+
+    // load drill templates
+    loadTemplates();
 };
 
 // cancel edit
@@ -164,6 +238,7 @@ window.addDrill = function (drill) {
             <option value="minutes" ${drill?.unit === 'minutes' ? 'selected' : ''}>minutes</option>
             <option value="seconds" ${drill?.unit === 'seconds' ? 'selected' : ''}>seconds</option>
         </select>
+        <button type="button" class="btn-save-template" onclick="saveDrillAsTemplate(this)">Save</button>
         <button type="button" class="btn-remove" onclick="this.parentElement.remove()">✕</button>
     `;
     list.appendChild(li);

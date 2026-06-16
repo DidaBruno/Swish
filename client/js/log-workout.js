@@ -1,5 +1,8 @@
 import { auth } from './firebase-config.js';
 import { onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
+import { getTemplates, saveTemplate, deleteTemplate } from './templates.js';
+
+let currentUser = null;
 
 // redirect to login if user is not logged in
 onAuthStateChanged(auth, (user) => {
@@ -7,7 +10,9 @@ onAuthStateChanged(auth, (user) => {
         window.location.href = '/login';
         return;
     }
+    currentUser = user;
     initPage();
+    loadTemplates();
 });
 
 // initialize log workout page
@@ -19,6 +24,76 @@ function initPage() {
     dateInput.value = today;
     dateInput.max = today;
 }
+
+// all functions for drill templates
+// load templates
+async function loadTemplates() {
+    try {
+        const token = await currentUser.getIdToken();
+        const templates = await getTemplates(token);
+        renderTemplates(templates);
+    } catch (err) {
+        console.error('Failed to load templates:', err);
+    }
+}
+
+// render template chips
+function renderTemplates(templates) {
+    const container = document.getElementById('templateButtons');
+    container.innerHTML = '';
+
+    if (templates.length === 0) {
+        container.innerHTML = '<p class="templates-empty">No saved drills yet. Save a drill to reuse it later.</p>';
+        return;
+    }
+
+    templates.forEach(t => {
+        const chip = document.createElement('div');
+        chip.className = 'template-chip';
+        chip.innerHTML = `
+            <span onclick="useTemplate('${t.name}', '${t.defaultUnit}')">${t.name}</span>
+            <button type="button" class="chip-delete" onclick="removeTemplate('${t.id}')">✕</button>
+        `;
+        container.appendChild(chip);
+    });
+}
+
+// use a template (add prefilled drill row)
+window.useTemplate = function (name, unit) {
+    addDrill({ name, count: 0, unit });
+};
+
+// save a drill row as a template
+window.saveDrillAsTemplate = async function (btn) {
+    const row = btn.closest('.drill-row');
+    const name = row.querySelector('.drill-name-input').value.trim();
+    const unit = row.querySelector('select').value;
+
+    if (!name) {
+        showError('Enter a drill name before saving as a template.');
+        return;
+    }
+
+    try {
+        const token = await currentUser.getIdToken();
+        await saveTemplate(token, name, unit);
+        loadTemplates();
+    } catch (err) {
+        showError(err.message);
+    }
+};
+
+// remove a template
+window.removeTemplate = async function (id) {
+    try {
+        const token = await currentUser.getIdToken();
+        await deleteTemplate(token, id);
+        loadTemplates();
+    } catch (err) {
+        console.error('Failed to delete template:', err);
+    }
+};
+
 
 // tab switching
 window.switchTab = function (tab) {
@@ -35,18 +110,19 @@ window.switchTab = function (tab) {
 
 
 // add drill row - so user can fill it out
-window.addDrill = function () {
+window.addDrill = function (drill) {
     const list = document.getElementById('drillList');
     const li = document.createElement('li');
     li.className = 'drill-row';
     li.innerHTML = `
-        <input type="text" class="drill-name-input" placeholder="Drill name">
-        <input type="number" class="drill-count-input" min="0" value="0">
+        <input type="text" class="drill-name-input" placeholder="Drill name" value="${drill?.name || ''}">
+        <input type="number" class="drill-count-input" min="0" value="${drill?.count || 0}">
         <select>
-            <option value="reps">reps</option>
-            <option value="minutes">minutes</option>
-            <option value="seconds">seconds</option>
+            <option value="reps" ${drill?.unit === 'reps' ? 'selected' : ''}>reps</option>
+            <option value="minutes" ${drill?.unit === 'minutes' ? 'selected' : ''}>minutes</option>
+            <option value="seconds" ${drill?.unit === 'seconds' ? 'selected' : ''}>seconds</option>
         </select>
+        <button type="button" class="btn-save-template" onclick="saveDrillAsTemplate(this)">Save</button>
         <button type="button" class="btn-remove" onclick="this.parentElement.remove()">✕</button>
     `;
     list.appendChild(li);

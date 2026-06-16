@@ -259,6 +259,88 @@
     color: var(--error);
 }
 
+
+/* Drill templates */
+.templates-section {
+    margin-top: 1.25rem;
+}
+
+.templates-label {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 8px;
+}
+
+.template-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.template-chip {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 6px 8px 6px 14px;
+    font-size: 13px;
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.template-chip:hover {
+    border-color: var(--orange);
+}
+
+.template-chip .chip-delete {
+    background: transparent;
+    border: none;
+    color: var(--dim);
+    cursor: pointer;
+    font-size: 13px;
+    padding: 0;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.template-chip .chip-delete:hover {
+    background: rgba(226, 75, 74, 0.15);
+    color: var(--error);
+}
+
+.templates-empty {
+    font-size: 12px;
+    color: var(--dim);
+}
+
+/* save as template button on a drill row */
+.btn-save-template {
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--muted);
+    padding: 0 12px;
+    height: 36px;
+    cursor: pointer;
+    font-size: 12px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: all 0.15s;
+}
+
+.btn-save-template:hover {
+    border-color: var(--orange);
+    color: var(--orange);
+}
+
 .games-input-list {
     display: flex;
     flex-direction: column;
