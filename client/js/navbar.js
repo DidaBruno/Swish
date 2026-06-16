@@ -119,6 +119,7 @@ function bindLogout() {
     const btn = document.getElementById('logoutBtn');
     if (btn) {
         btn.addEventListener('click', async () => {
+            sessionStorage.removeItem('username');
             await signOut(auth);
             window.location.href = '/login';
         });
@@ -128,6 +129,7 @@ function bindLogout() {
     const drawerBtn = document.getElementById('drawerLogoutBtn');
     if (drawerBtn) {
         drawerBtn.addEventListener('click', async () => {
+            sessionStorage.removeItem('username');
             await signOut(auth);
             window.location.href = '/login';
         });

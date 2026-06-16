@@ -100,6 +100,7 @@ window.handleLogin = async function() {
 
     try {
         await signInWithEmailAndPassword(auth, email, password);
+        sessionStorage.removeItem('username');
     } catch (err) {
         const msg = err.code === 'auth/invalid-credential'
         ? 'Incorrect email or password.'
@@ -142,7 +143,8 @@ window.handleRegister = async function() {
             notifiedAchievements: []
         });
 
-        isRegistering = false;
+        sessionStorage.removeItem('username');
+        window.location.href = '/dashboard';
     } catch (err) {
         isRegistering = false;
         console.error('FULL REGISTER ERROR:', err.code, err.message);
