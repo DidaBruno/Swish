@@ -30,6 +30,7 @@ export async function getTodayWorkout(req, res) {
     }
 }
 
+// this is for dashobard
 // get recent workout
 export async function getRecentWorkout(req, res) {
     try {
@@ -168,6 +169,7 @@ export async function getWorkoutById(req, res) {
     }
 }
 
+// this is for workout detail
 // update a workout
 export async function updateWorkout(req, res) {
     try {
@@ -206,6 +208,7 @@ export async function updateWorkout(req, res) {
     }
 }
 
+// this is for workout detail
 // delete a workout
 export async function deleteWorkout(req, res) {
     try {
@@ -232,4 +235,86 @@ export async function deleteWorkout(req, res) {
         console.error('deleteWorkout error:', err);
         res.status(500).json({ error: 'Failed to delete workout' });
     }
+}
+
+// this is for profile
+// get user stats
+export async function getStats(req, res) {
+    try {
+        const userId = req.user.uid;
+
+        // fetch all the user's workouts
+        const snapshot = await db
+            .collection('workouts')
+            .where('userId', '==', userId)
+            .orderBy('date', 'asc')
+            .get();
+
+        const workouts = snapshot.docs.map(doc => doc.data());
+
+        // totals
+        let totalShots = 0;
+        const shootingTotals = { twos: 0, threes: 0, freeThrows: 0, layups: 0, dunks: 0 };
+        let gamesPlayed = 0;
+
+        workouts.forEach(w => {
+            const s = w.drills?.shooting;
+            if (s) {
+                shootingTotals.twos += s.twos || 0;
+                shootingTotals.threes += s.threes || 0;
+                shootingTotals.freeThrows += s.freeThrows || 0;
+                shootingTotals.layups += s.layups || 0;
+                shootingTotals.dunks += s.dunks || 0;
+            }
+            gamesPlayed += w.games?.length || 0;
+        });
+
+        totalShots = shootingTotals.twos + shootingTotals.threes +
+            shootingTotals.freeThrows + shootingTotals.layups + shootingTotals.dunks;
+
+        // biggest streak
+        const biggestStreak = calculateStreak(workouts);
+
+        return res.json({
+            totalWorkouts: workouts.length,
+            biggestStreak,
+            totalShots,
+            shootingTotals,
+            gamesPlayed
+        });
+
+    } catch (err) {
+        console.error('getStats error:', err);
+        res.status(500).json({ error: 'Failed to fetch stats' });
+    }
+}
+
+// Helper function to calculate biggest consecutive-day streak
+function calculateStreak(workouts) {
+    if (workouts.length === 0) return 0;
+
+    // get unique workout dates as a sorted set of YYYY-MM-DD strings
+    const uniqueDates = [...new Set(workouts.map(w => w.date))].sort();
+
+    let biggest = 1;
+    let current = 1;
+
+    for (let i = 1; i < uniqueDates.length; i++) {
+        const prev = new Date(uniqueDates[i - 1]);
+        const curr = new Date(uniqueDates[i]);
+
+        // difference in days between consecutive dates
+        const diffDays = (curr - prev) / (1000 * 60 * 60 * 24);
+
+        if (diffDays === 1) {
+            // consecutive day - extend the streak
+            current++;
+            biggest = Math.max(biggest, current);
+        } else {
+            // gap - reset the streak
+            current = 1;
+        }
+    }
+
+    return biggest;
 }

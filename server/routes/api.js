@@ -7,7 +7,8 @@ import {
     getAllWorkouts,
     getWorkoutById,
     updateWorkout,
-    deleteWorkout
+    deleteWorkout,
+    getStats
 } from '../controllers/workoutController.js';
 import {
     getTemplates,
@@ -48,5 +49,9 @@ router.get('/templates', verifyToken, getTemplates);
 router.post('/templates', verifyToken, saveTemplate);
 // DELETE /api/templates/:id — deletes a template
 router.delete('/templates/:id', verifyToken, deleteTemplate);
+
+// this is for profile
+// GET /api/stats — returns aggregated user stats
+router.get('/stats', verifyToken, getStats);
 
 export default router;

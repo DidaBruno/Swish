@@ -138,7 +138,8 @@ window.handleRegister = async function() {
         await setDoc(doc(db, 'users', user.uid), {
             username,
             email,
-            createdAt: serverTimestamp()
+            createdAt: serverTimestamp(),
+            notifiedAchievements: []
         });
 
         isRegistering = false;

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swish - Profile</title>
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/profile.css">
+</head>
+<body>
+
+    <!-- navbar - loads from navbar.js -->
+    <nav class="navbar" id="navbar"></nav>
+
+    <main class="page-wrapper">
+
+        <!-- profile header -->
+        <div class="profile-header">
+            <div class="profile-avatar" id="profileAvatar"></div>
+            <div class="profile-info">
+                <h1 id="profileUsername">...</h1>
+                <p id="profileMemberSince" class="member-since"></p>
+            </div>
+        </div>
+
+        <!-- loading state -->
+        <div id="loadingState" class="info-state">Loading stats...</div>
+
+        <!-- stats -->
+        <div id="statsContent" class="d-none">
+
+            <!-- headline stats -->
+            <div class="stat-cards">
+                <div class="stat-card">
+                    <span class="stat-card-value" id="statTotalWorkouts">0</span>
+                    <span class="stat-card-label">Total workouts</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-card-value" id="statBiggestStreak">0</span>
+                    <span class="stat-card-label">Best streak (days)</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-card-value" id="statTotalShots">0</span>
+                    <span class="stat-card-label">Total shots made</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-card-value" id="statGamesPlayed">0</span>
+                    <span class="stat-card-label">Games played</span>
+                </div>
+            </div>
+
+            <!-- shooting breakdown -->
+            <div class="shooting-breakdown">
+                <h2 class="breakdown-title">Shooting breakdown</h2>
+                <div class="breakdown-grid">
+                    <div class="breakdown-box">
+                        <span class="breakdown-value" id="statTwos">0</span>
+                        <span class="breakdown-label">2-pointers</span>
+                    </div>
+                    <div class="breakdown-box">
+                        <span class="breakdown-value" id="statThrees">0</span>
+                        <span class="breakdown-label">3-pointers</span>
+                    </div>
+                    <div class="breakdown-box">
+                        <span class="breakdown-value" id="statFreeThrows">0</span>
+                        <span class="breakdown-label">Free throws</span>
+                    </div>
+                    <div class="breakdown-box">
+                        <span class="breakdown-value" id="statLayups">0</span>
+                        <span class="breakdown-label">Layups</span>
+                    </div>
+                    <div class="breakdown-box">
+                        <span class="breakdown-value" id="statDunks">0</span>
+                        <span class="breakdown-label">Dunks</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <script type="module" src="../js/navbar.js"></script>
+    <script type="module" src="../js/profile.js"></script>
+</body>
+</html>

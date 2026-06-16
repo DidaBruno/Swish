@@ -1,0 +1,130 @@
+/* Header */
+.references-header {
+    margin-bottom: 1.5rem;
+}
+
+.references-header h1 {
+    font-size: 22px;
+    font-weight: 600;
+}
+
+/* Shared box style */
+.tech-box,
+.lib-box,
+.tool-box,
+.sources-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.25rem;
+}
+
+.tech-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 1rem;
+}
+
+/* Top row: frontend / backend / database */
+.tech-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.tech-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.tech-list li {
+    font-size: 14px;
+    color: var(--muted);
+    padding-left: 14px;
+    position: relative;
+}
+
+.tech-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--muted);
+}
+
+/* Middle row: libraries + tools */
+.lib-tool-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.lib-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.lib-list li {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+}
+
+.lib-name {
+    color: var(--text);
+    font-weight: 600;
+    font-family: monospace;
+    font-size: 13px;
+}
+
+/* References / sources box */
+.sources-sub {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: -0.5rem;
+    margin-bottom: 1.25rem;
+}
+
+.ref-list-full {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.ref-list-full a {
+    font-size: 13px;
+    color: var(--blue);
+    text-decoration: none;
+}
+
+.ref-list-full a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .tech-row {
+        grid-template-columns: 1fr;
+    }
+
+    .lib-tool-row {
+        grid-template-columns: 1fr;
+    }
+}
