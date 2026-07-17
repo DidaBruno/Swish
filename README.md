@@ -1,6 +1,10 @@
-# Swish
 
+<img width="2000" height="250" alt="Swish" src="https://github.com/user-attachments/assets/85cd71ce-d1b2-4d41-a5a2-eb61542e134f" />
+
+#
 Web app that allows you to track you basketball workouts and see your achievements. Workouts are comprised of shooting and handling skills along with stats from played games.
+
+<img width="2667" height="860" alt="0-swish" src="https://github.com/user-attachments/assets/b3f53487-f2c2-4a6b-99d8-493a7561e4c6" />
 
 ## Stack
 - Frontend: HTML, CSS, vanilla JavaScript
