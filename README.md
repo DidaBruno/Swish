@@ -4,7 +4,7 @@
 #
 Web app that allows you to track you basketball workouts and see your achievements. Workouts are comprised of shooting and handling skills along with stats from played games.
 
-<img width="2667" height="860" alt="0-swish" src="https://github.com/user-attachments/assets/b3f53487-f2c2-4a6b-99d8-493a7561e4c6" />
+<img width="1918" height="862" alt="1-swish" src="https://github.com/user-attachments/assets/a0bea2df-7a5c-4d0c-88c8-3cd8eaf2c112" />
 
 ## Stack
 - Frontend: HTML, CSS, vanilla JavaScript
