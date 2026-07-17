@@ -13,12 +13,12 @@ Web app that allows you to track you basketball workouts and see your achievemen
 - Auth: Firebase Authentication (client side)
 
 ## Pages and URLs
-- /login — login/register
-- /dashboard — today's workout snapshot
-- /log-workout — create new workout
-- /workouts — workout history
-- /workout-detail — single workout view and edit
-- /profile — user info and stats
+- /login - login/register
+- /dashboard - today's workout snapshot
+- /log-workout - create new workout
+- /workouts - workout history
+- /workout-detail - single workout view and edit
+- /profile - user info and stats
 - /references — sources page
 
 ## Database Collections
